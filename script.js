@@ -58,7 +58,7 @@ const ABOUT_HTML = `
 
 const PROJECTS = [
   {
-    id: "p13",
+    id: "p14",
     title: "XXXXXXXXXX",
     subtitle: "XXXXXXXXXX",
     desc: "XXXXXXXXXX",
@@ -72,7 +72,7 @@ const PROJECTS = [
     photos: 0,
   },
   {
-    id: "p12",
+    id: "p13",
     title: "A Home in the Sun",
     subtitle: "Coliving for Seniors",
     desc: "An elderly coliving home for seniors in Lysá nad Labem, Czech Republic. The project proposes a shared domestic environment that rethinks how aging populations inhabit collective space — prioritising thermal comfort, communal activity, and open-ended use over institutional typology. Warmth, both climatic and social, is the organising principle.",
@@ -83,7 +83,7 @@ const PROJECTS = [
     status: "—",
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
-    photos: 0,
+    photos: 10,
   },
   {
     id: "p11",
@@ -125,7 +125,7 @@ const PROJECTS = [
     status: "2nd Prize",
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
-    photos: 0,
+    photos: 5,
   },
   {
     id: "p08",
@@ -139,7 +139,7 @@ const PROJECTS = [
     status: "—",
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
-    photos: 0,
+    photos: 7,
   },
   {
     id: "p07",
@@ -153,7 +153,7 @@ const PROJECTS = [
     status: "—",
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
-    photos: 0,
+    photos: 10,
   },
   {
     id: "p06b",
@@ -167,7 +167,7 @@ const PROJECTS = [
     status: "—",
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
-    photos: 0,
+    photos: 7,
   },
   {
     id: "p06",
