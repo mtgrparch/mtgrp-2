@@ -1,17 +1,14 @@
-/* style.css */
-* {
-  box-sizing: border-box;
-}
+/* ── RESET & BASE ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  margin: 0;
-  background-color: #ffffff;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  overflow: hidden; /* Prevents native scrollbars to allow pure virtual scrolling */
-  touch-action: none; /* Prevents default touch scrolling on mobile */
+  background: #ffffff;
+  font-family: 'EB Garamond', Georgia, serif;
+  overflow: hidden;
+  touch-action: none;
 }
 
-/* Central Overlay */
+/* ── CENTER LOGO ── */
 .center-logo {
   position: fixed;
   top: 50%;
@@ -20,82 +17,108 @@ body {
   font-family: 'Karla', sans-serif;
   font-weight: 800;
   font-size: 18vw;
+  line-height: 1;
   margin: 0;
-  color: white; 
+  color: white;
   mix-blend-mode: difference;
-  pointer-events: none; 
+  pointer-events: none;
   z-index: 10;
   text-align: center;
   width: 100%;
+  user-select: none;
 }
 
-/* About Button (+) */
+/* ── TOP UI BUTTONS ── */
 #about-btn {
   position: fixed;
-  top: 20px;
-  left: 20px;
+  top: 22px;
+  left: 24px;
   font-family: 'Karla', sans-serif;
   font-weight: 800;
-  font-size: 3rem;
+  font-size: 2.4rem;
   line-height: 0.8;
   color: white;
   mix-blend-mode: difference;
   cursor: pointer;
   z-index: 10;
+  user-select: none;
+  transition: opacity 0.15s;
+}
+#about-btn:hover { opacity: 0.6; }
+
+#work-btn {
+  position: fixed;
+  top: 28px;
+  right: 24px;
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: white;
+  mix-blend-mode: difference;
+  cursor: pointer;
+  z-index: 10;
+  user-select: none;
+  transition: opacity 0.15s;
+}
+#work-btn:hover { opacity: 0.6; }
+
+/* ── FOOTER CITIES ── */
+#footer-cities {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: white;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
 }
 
-/* Parallax Grid */
+/* ── PARALLAX GRID ── */
 .parallax-wrapper {
   display: flex;
-  gap: 15px;
+  gap: 12px;
   height: 100vh;
-  padding: 0 15px;
+  padding: 0 12px;
 }
 
 .parallax-col {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
   will-change: transform;
 }
 
-/* Base image styling */
 .parallax-col img {
   width: 100%;
   height: auto;
   object-fit: cover;
   cursor: pointer;
+  display: block;
+  background: #f0f0f0;
+  min-height: 180px;
   transition: opacity 0.2s ease;
-  background: #f4f4f4; /* Placeholder color before images load */
-  min-height: 200px;   /* Ensures empty images have space */
 }
 
 @media (hover: hover) {
-  .parallax-col img:hover {
-    opacity: 0.8;
-  }
+  .parallax-col img:hover { opacity: 0.75; }
 }
 
-/* Responsive adjustments for mobile (Single Column) */
-@media (max-width: 768px) {
-  .parallax-wrapper {
-    padding: 0;
-  }
-  .parallax-col {
-    gap: 0; 
-  }
-}
-
-/* Modal / Popup System */
-.hidden {
-  display: none !important;
-}
+/* ── MODAL ── */
+.hidden { display: none !important; }
 
 #modal-container {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255, 255, 255, 0.95);
+  inset: 0;
+  background: rgba(255,255,255,0.96);
   z-index: 20;
   display: flex;
   justify-content: center;
@@ -105,55 +128,120 @@ body {
 .modal-box {
   position: relative;
   width: 90vw;
-  max-width: 800px;
-  max-height: 90vh;
-  background: #ffffff;
-  border: 1px solid #000000; 
-  padding: 60px 40px 40px 40px;
+  max-width: 760px;
+  max-height: 88vh;
+  background: #fff;
+  border: 1px solid #000;
+  padding: 56px 48px 48px;
   overflow-y: auto;
+  /* smooth modal scroll */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 #close-modal {
   position: absolute;
-  top: 20px;
+  top: 18px;
   left: 20px;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
+  font-family: 'Karla', sans-serif;
+  line-height: 1;
   padding: 0;
-  font-family: 'Helvetica Neue', sans-serif;
+  transition: opacity 0.15s;
+}
+#close-modal:hover { opacity: 0.4; }
+
+/* modal typography */
+.modal-box h2 {
+  font-family: 'Karla', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+  line-height: 1;
 }
 
-/* Typography inside the modal */
 .modal-data-table {
   width: 100%;
-  max-width: 600px;
-  margin-bottom: 20px;
   border-collapse: collapse;
+  margin-bottom: 24px;
 }
 
 .modal-data-table td {
-  padding: 8px 0;
+  padding: 9px 0;
   vertical-align: top;
   border-bottom: 1px solid #eee;
-}
-
-.modal-data-table td:first-child {
-  font-weight: bold;
-  width: 120px;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-}
-
-p {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
-h2 {
+.modal-data-table td:first-child {
   font-family: 'Karla', sans-serif;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-size: 2rem;
-  margin-top: 0;
+  color: #aaa;
+  width: 110px;
+  padding-top: 11px;
+}
+
+.modal-desc {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.78;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.modal-team-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.modal-team-list li {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.95rem;
+  color: #888;
+}
+
+/* about modal specific */
+.about-statement {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: #111;
+  margin-bottom: 28px;
+}
+
+.about-partners {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 32px;
+  margin-bottom: 28px;
+}
+.partner-name {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1rem;
+  color: #111;
+}
+.partner-role {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .parallax-wrapper { padding: 0; gap: 0; }
+  .modal-box { padding: 48px 24px 32px; }
+  .about-partners { grid-template-columns: 1fr; }
+  #footer-cities { font-size: 0.72rem; }
 }
