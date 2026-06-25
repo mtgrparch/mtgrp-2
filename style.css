@@ -8,20 +8,37 @@ body {
   touch-action: none;
 }
 
-/* ── TOP LEFT: MTGRP WORDMARK ── */
+/* ── BOTTOM LEFT: MTGRP LOGO ── */
 #wordmark {
   position: fixed;
-  top: 22px;
-  left: 24px;
+  bottom: 16px;
+  left: 12px;
+  /* width matches one column: (100vw - 2*padding - 2*gaps) / 3 columns
+     padding=12px each side, gap=12px × 2 = 36px total gap
+     so column width ≈ (100vw - 24px - 24px) / 3 = calc((100vw - 48px) / 3)
+     logo is set slightly smaller than that */
+  width: calc((100vw - 48px) / 3 - 8px);
   font-family: 'Karla', sans-serif;
   font-weight: 800;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
   color: white;
   mix-blend-mode: difference;
   pointer-events: none;
   z-index: 10;
   user-select: none;
+}
+
+/* mobile: full-width single column, logo takes about half */
+@media (max-width: 768px) {
+  #wordmark {
+    width: 52vw;
+    font-size: clamp(3rem, 14vw, 6rem);
+    bottom: 14px;
+    left: 0;
+    padding-left: 0;
+  }
 }
 
 /* ── TOP RIGHT: + ABOUT BUTTON ── */
@@ -59,6 +76,10 @@ body {
   white-space: nowrap;
 }
 
+@media (max-width: 768px) {
+  #footer-cities { display: none; }
+}
+
 /* ── PARALLAX GRID ── */
 .parallax-wrapper {
   display: flex;
@@ -77,17 +98,26 @@ body {
 
 .parallax-col img {
   width: 100%;
-  height: auto;
+  height: 60vh;
   object-fit: cover;
   cursor: pointer;
   display: block;
   background: #f0f0f0;
-  min-height: 180px;
   transition: opacity 0.2s ease;
 }
 
+/* Different heights per column for visual rhythm */
+.parallax-col:nth-child(1) img { height: 55vh; }
+.parallax-col:nth-child(2) img { height: 72vh; }
+.parallax-col:nth-child(3) img { height: 48vh; }
+
 @media (hover: hover) {
   .parallax-col img:hover { opacity: 0.75; }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .parallax-wrapper { padding: 0; gap: 0; }
 }
 
 /* ── MODAL ── */
@@ -112,7 +142,6 @@ body {
   border: 1px solid #000;
   padding: 56px 48px 48px;
   overflow-y: auto;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -131,7 +160,6 @@ body {
 }
 #close-modal:hover { opacity: 0.4; }
 
-/* modal typography */
 .modal-box h2 {
   font-family: 'Karla', sans-serif;
   font-weight: 800;
@@ -188,7 +216,6 @@ body {
   color: #888;
 }
 
-/* about modal */
 .about-statement {
   font-family: 'EB Garamond', Georgia, serif;
   font-size: 1.1rem;
@@ -215,10 +242,7 @@ body {
   color: #888;
 }
 
-/* ── MOBILE ── */
 @media (max-width: 768px) {
-  .parallax-wrapper { padding: 0; gap: 0; }
   .modal-box { padding: 48px 24px 32px; }
   .about-partners { grid-template-columns: 1fr; }
-  #footer-cities { font-size: 0.72rem; }
 }

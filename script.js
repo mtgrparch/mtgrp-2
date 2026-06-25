@@ -305,7 +305,8 @@ function buildProjectHTML(p) {
 //  Each project contributes placeholder tiles (one per photo slot, min 1).
 //  When you add real photos, replace the placeholder src with the real path.
 
-const isMobile   = window.innerWidth <= 768;
+// Use screen.width for mobile detection — more reliable than innerWidth at load time
+const isMobile   = Math.min(window.screen.width, window.screen.height) <= 768;
 const COL_COUNT  = isMobile ? 1 : 3;
 const SPEEDS     = isMobile ? [1.0] : [0.7, 1.35, 0.55];
 const MARGINS    = isMobile ? [0]   : [0, -200, -110];
@@ -405,59 +406,77 @@ function attachClickListeners() {
     });
   });
 }
-
 // ── 7. SMOOTH INERTIA SCROLL ──────────────────────────────────────────────────
-//  virtualScrollY  = raw target (driven by wheel/touch)
-//  smoothScrollY   = interpolated actual position (lerped each frame)
-//  This gives the buttery "easing" feel instead of instant jumps.
+//
+//  The flip/lag bug happens when virtualScrollY grows unboundedly and the
+//  modulo wrapping causes a discontinuous jump mid-lerp.
+//
+//  Fix: we never let the raw scroll value drift far from zero. Instead we
+//  accumulate scroll into a "velocity" variable and apply momentum decay
+//  each frame — this gives smooth inertia without ever needing modulo on
+//  the raw input value. The per-column wrap only applies to the final
+//  visual offset, not to the running total.
+//
+//  virtualScrollY  = running total (unbounded but normalised)
+//  velocity        = pixels/frame remaining momentum
+//  FRICTION        = how fast momentum decays (0.88 = natural feel)
 
 let virtualScrollY = 0;
-let smoothScrollY  = 0;
-const LERP_FACTOR  = 0.08; // lower = smoother/slower, higher = snappier
+let velocity       = 0;
+const FRICTION     = 0.88;   // momentum decay per frame — lower = stops faster
+const WHEEL_SCALE  = 0.7;    // wheel sensitivity
+const TOUCH_SCALE  = 1.6;    // touch drag sensitivity
 
-// Mouse wheel — accumulate delta
+// Mouse wheel — add to velocity rather than position directly
 window.addEventListener('wheel', e => {
   e.preventDefault();
-  virtualScrollY += e.deltaY * 0.9;
+  velocity += e.deltaY * WHEEL_SCALE;
 }, { passive: false });
 
 // Touch
-let touchStartY = 0;
-window.addEventListener('touchstart', e => {
-  touchStartY = e.touches[0].clientY;
-}, { passive: false });
+let touchStartY  = 0;
+let lastTouchY   = 0;
+let touchVelocity = 0;
 
-window.addEventListener('touchmove', e => {
+function onTouchStart(e) {
+  touchStartY   = e.touches[0].clientY;
+  lastTouchY    = touchStartY;
+  touchVelocity = 0;
+}
+
+function onTouchMove(e) {
   e.preventDefault();
-  const delta = touchStartY - e.touches[0].clientY;
-  virtualScrollY += delta * 1.5;
-  touchStartY = e.touches[0].clientY;
-}, { passive: false });
+  const currentY = e.touches[0].clientY;
+  const delta    = lastTouchY - currentY;
+  touchVelocity  = delta * TOUCH_SCALE;
+  virtualScrollY += touchVelocity;
+  lastTouchY     = currentY;
+}
 
-// Trackpad momentum — deltaMode 0 = pixels (trackpad), apply less multiplier
-window.addEventListener('wheel', () => {}, { passive: true }); // dummy to suppress warning
-
-function lerp(a, b, t) { return a + (b - a) * t; }
+function onTouchEnd() {
+  // hand off touch momentum to the velocity system so it coasts naturally
+  velocity = touchVelocity;
+}
 
 function updateParallax() {
-  // Smooth interpolation toward target
-  smoothScrollY = lerp(smoothScrollY, virtualScrollY, LERP_FACTOR);
+  // Apply velocity → position, then decay velocity
+  velocity      *= FRICTION;
+  virtualScrollY += velocity;
 
-  const cols = document.querySelectorAll('.parallax-col');
-  cols.forEach(col => {
-    const speed = parseFloat(col.dataset.speed);
-    let y = -(smoothScrollY * speed);
+  // Stop adding tiny residual movement below threshold
+  if (Math.abs(velocity) < 0.05) velocity = 0;
 
-    // Infinite loop: when we've scrolled a full "set" height, reset
+  document.querySelectorAll('.parallax-col').forEach(col => {
+    const speed      = parseFloat(col.dataset.speed);
     const halfHeight = col.scrollHeight / 2;
-    if (halfHeight > 0) {
-      y = ((y % halfHeight) + halfHeight) % halfHeight - halfHeight;
-      // handle upward scroll
-      if (smoothScrollY < 0) {
-        y = -(Math.abs(smoothScrollY * speed) % halfHeight);
-        if (y < -halfHeight) y += halfHeight;
-      }
-    }
+    if (halfHeight <= 0) return;
+
+    // Raw offset for this column
+    let y = -(virtualScrollY * speed);
+
+    // Wrap visually so the column loops — modulo only on final display value
+    // Using the positive-safe form: always produces a value in [−halfHeight, 0)
+    y = ((y % halfHeight) + halfHeight) % halfHeight - halfHeight;
 
     col.style.transform = `translateY(${y}px)`;
   });
@@ -468,5 +487,11 @@ function updateParallax() {
 // ── 8. INIT ───────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
   buildGrid();
+
+  const grid = document.getElementById('parallax-grid');
+  grid.addEventListener('touchstart', onTouchStart, { passive: false });
+  grid.addEventListener('touchmove',  onTouchMove,  { passive: false });
+  grid.addEventListener('touchend',   onTouchEnd,   { passive: true  });
+
   requestAnimationFrame(updateParallax);
 });
