@@ -319,7 +319,7 @@ function buildTileList() {
     for (let i = 1; i <= count; i++) {
       const num = String(i).padStart(2, '0');
       const src = p.photos > 0
-        ? `photos/${p.id}-${num}.jpg`
+        ? `photos/${p.id}-${num}.webp`
         : null; // null = show styled placeholder
       tiles.push({ src, projectId: p.id, label: p.title });
     }
