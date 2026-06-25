@@ -306,9 +306,9 @@ function buildProjectHTML(p) {
 //  When you add real photos, replace the placeholder src with the real path.
 
 const isMobile   = window.innerWidth <= 768;
-const COL_COUNT  = isMobile ? 1 : 4;
-const SPEEDS     = isMobile ? [1.0] : [0.75, 1.4, 1.1, 0.5];
-const MARGINS    = isMobile ? [0]   : [0, -180, -90, -220];
+const COL_COUNT  = isMobile ? 1 : 3;
+const SPEEDS     = isMobile ? [1.0] : [0.7, 1.35, 0.55];
+const MARGINS    = isMobile ? [0]   : [0, -200, -110];
 
 // Build a flat list of image tiles from all projects
 function buildTileList() {
@@ -394,7 +394,7 @@ document.addEventListener('keydown', e => {
 });
 
 document.getElementById('about-btn').addEventListener('click', () => openModal(ABOUT_HTML));
-document.getElementById('work-btn').addEventListener('click', () => openModal(buildWorkListHTML()));
+
 
 function attachClickListeners() {
   // both real <img> and placeholder <div> tiles
