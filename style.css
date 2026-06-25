@@ -1,0 +1,159 @@
+/* style.css */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #ffffff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow: hidden; /* Prevents native scrollbars to allow pure virtual scrolling */
+  touch-action: none; /* Prevents default touch scrolling on mobile */
+}
+
+/* Central Overlay */
+.center-logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Karla', sans-serif;
+  font-weight: 800;
+  font-size: 18vw;
+  margin: 0;
+  color: white; 
+  mix-blend-mode: difference;
+  pointer-events: none; 
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+}
+
+/* About Button (+) */
+#about-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-family: 'Karla', sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 0.8;
+  color: white;
+  mix-blend-mode: difference;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Parallax Grid */
+.parallax-wrapper {
+  display: flex;
+  gap: 15px;
+  height: 100vh;
+  padding: 0 15px;
+}
+
+.parallax-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  will-change: transform;
+}
+
+/* Base image styling */
+.parallax-col img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  background: #f4f4f4; /* Placeholder color before images load */
+  min-height: 200px;   /* Ensures empty images have space */
+}
+
+@media (hover: hover) {
+  .parallax-col img:hover {
+    opacity: 0.8;
+  }
+}
+
+/* Responsive adjustments for mobile (Single Column) */
+@media (max-width: 768px) {
+  .parallax-wrapper {
+    padding: 0;
+  }
+  .parallax-col {
+    gap: 0; 
+  }
+}
+
+/* Modal / Popup System */
+.hidden {
+  display: none !important;
+}
+
+#modal-container {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  position: relative;
+  width: 90vw;
+  max-width: 800px;
+  max-height: 90vh;
+  background: #ffffff;
+  border: 1px solid #000000; 
+  padding: 60px 40px 40px 40px;
+  overflow-y: auto;
+}
+
+#close-modal {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Typography inside the modal */
+.modal-data-table {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.modal-data-table td {
+  padding: 8px 0;
+  vertical-align: top;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-data-table td:first-child {
+  font-weight: bold;
+  width: 120px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+p {
+  line-height: 1.5;
+}
+
+h2 {
+  font-family: 'Karla', sans-serif;
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin-top: 0;
+}
