@@ -44,7 +44,7 @@ const COLLABORATORS = {
     "Jorge Sanchez Bajo, Bettina Kagelmacher, Roman Schober, Jaques Zekian, Mike Chaiban, Valerie Saab, Christina Karam, Ryuhei Ismael Kagawa, Jorge Andres Rodriguez Angel, Andrey Bader",
   ],
   offices: [
-    "tebt+, esteoeste, superunion",
+    "tebt+, esteoeste, superunion, b.noma, studio street 9",
   ],
 };
 
