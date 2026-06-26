@@ -78,11 +78,11 @@ function buildAboutHTML() {
     ${(COLLABORATORS.architects.length || COLLABORATORS.offices.length) ? `
     <div class="about-collabs">
       <div class="about-collabs-col">
-        <div class="collabs-label">Architects</div>
+        <div class="collabs-label">Collaborators and Friends</div>
         ${COLLABORATORS.architects.map(n => `<div class="collab-entry">${n}</div>`).join('')}
       </div>
       <div class="about-collabs-col">
-        <div class="collabs-label">Offices</div>
+        <div class="collabs-label">Offices of our Friends</div>
         ${COLLABORATORS.offices.map(n => `<div class="collab-entry">${n}</div>`).join('')}
       </div>
     </div>` : ''}`;
