@@ -545,4 +545,47 @@ window.addEventListener('DOMContentLoaded', () => {
   grid.addEventListener('touchend',   onTouchEnd,   { passive: true  });
 
   requestAnimationFrame(updateParallax);
+
+  // ── LIVE WEATHER ──────────────────────────────────────────────
+// Open-Meteo: free, no API key, no account needed
+// Coordinates: Beirut, Madrid, Milan
+const WEATHER_CITIES = [
+  { id: 'weather-beirut', name: 'Beirut', lat: 33.89, lon: 35.50 },
+  { id: 'weather-madrid', name: 'Madrid', lat: 40.42, lon: -3.70 },
+  { id: 'weather-milan',  name: 'Milan',  lat: 45.46, lon:  9.19 },
+];
+
+async function fetchWeather() {
+  WEATHER_CITIES.forEach(async city => {
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current=temperature_2m,weather_code&temperature_unit=celsius`;
+      const res  = await fetch(url);
+      const data = await res.json();
+      const temp = Math.round(data.current.temperature_2m);
+      const code = data.current.weather_code;
+      const icon = weatherIcon(code);
+      document.getElementById(city.id).textContent = `${city.name} ${icon} ${temp}°`;
+    } catch {
+      document.getElementById(city.id).textContent = city.name;
+    }
+  });
+}
+
+function weatherIcon(code) {
+  if (code === 0)              return '○';   // clear
+  if (code <= 2)               return '◑';   // partly cloudy
+  if (code === 3)              return '●';   // overcast
+  if (code <= 49)              return '≋';   // fog/mist
+  if (code <= 59)              return '·';   // drizzle
+  if (code <= 69)              return '·';   // rain
+  if (code <= 79)              return '*';   // snow
+  if (code <= 82)              return '·';   // showers
+  if (code <= 86)              return '*';   // snow showers
+  if (code <= 99)              return '⚡';  // thunderstorm
+  return '';
+}
+
+fetchWeather();
+// refresh every 10 minutes
+setInterval(fetchWeather, 10 * 60 * 1000);
 });
