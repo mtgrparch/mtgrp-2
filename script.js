@@ -5,38 +5,63 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ── 1. ABOUT DATA ────────────────────────────────────────────────────────────
-const ABOUT_HTML = `
-  <h2>MTGRP</h2>
-  <p class="about-statement">
-    Architecture concerned with metabolism and circularity — a political approach
-    to temperature, material expression, and collective use. We are interested in
-    the spaces in between.
-  </p>
-  <div class="about-partners">
+//  Partner photos: put files at photos/team-andrew.jpg etc.
+//  Partner bios: fill in the bio strings below.
+const PARTNERS = [
+  {
+    name: "Andrew Georges",
+    role: "Partner",
+    photo: "photos/team-andrew.jpg",
+    bio: "Add bio here.",
+  },
+  {
+    name: "Charbel Abou Chacra",
+    role: "Partner",
+    photo: "photos/team-charbel.jpg",
+    bio: "Add bio here.",
+  },
+  {
+    name: "Nahi El Khoury",
+    role: "Partner",
+    photo: "photos/team-nahi.jpg",
+    bio: "Add bio here.",
+  },
+  {
+    name: "Joe Chamata",
+    role: "Partner",
+    photo: "photos/team-joe.jpg",
+    bio: "Add bio here.",
+  },
+];
+
+function buildAboutHTML() {
+  const partnersHTML = PARTNERS.map(p => `
     <div>
-      <div class="partner-name">Andrew Georges</div>
-      <div class="partner-role">Partner</div>
-    </div>
-    <div>
-      <div class="partner-name">Charbel Abou Chacra</div>
-      <div class="partner-role">Partner</div>
-    </div>
-    <div>
-      <div class="partner-name">Nahi El Khoury</div>
-      <div class="partner-role">Partner</div>
-    </div>
-    <div>
-      <div class="partner-name">Joe Chamata</div>
-      <div class="partner-role">Partner</div>
-    </div>
-  </div>
-  <table class="modal-data-table">
-    <tr><td>Email</td><td><a href="mailto:contact@mtgrp.xyz" style="color:#0033FF;text-decoration:none">contact@mtgrp.xyz</a></td></tr>
-    <tr><td>Instagram</td><td><a href="https://www.instagram.com/metagroupe/" target="_blank" style="color:#0033FF;text-decoration:none">@metagroupe</a></td></tr>
-    <tr><td>Offices</td><td>Beirut &nbsp;·&nbsp; Madrid &nbsp;·&nbsp; Milan</td></tr>
-    <tr><td>Est.</td><td>2018</td></tr>
-  </table>
-`;
+      <div class="partner-photo">
+        <img src="${p.photo}" alt="${p.name}"
+             onerror="this.parentElement.innerHTML='Photo'"
+             loading="lazy">
+      </div>
+      <div class="partner-name">${p.name}</div>
+      <div class="partner-role">${p.role}</div>
+      <p class="partner-bio">${p.bio}</p>
+    </div>`).join('');
+
+  return `
+    <div class="modal-title">metagroupe</div>
+    <p class="about-statement">
+      Architecture concerned with metabolism and circularity — a political approach
+      to temperature, material expression, and collective use. We are interested in
+      the spaces in between.
+    </p>
+    <div class="about-partners">${partnersHTML}</div>
+    <table class="about-contact-table">
+      <tr><td>Email</td><td><a href="mailto:contact@mtgrp.xyz" style="color:#0033FF;text-decoration:none">contact@mtgrp.xyz</a></td></tr>
+      <tr><td>Instagram</td><td><a href="https://www.instagram.com/metagroupe/" target="_blank" style="color:#0033FF;text-decoration:none">@metagroupe</a></td></tr>
+      <tr><td>Offices</td><td>Beirut &nbsp;·&nbsp; Madrid &nbsp;·&nbsp; Milan</td></tr>
+      <tr><td>Est.</td><td>2018</td></tr>
+    </table>`;
+}
 
 // ── 2. PROJECT REGISTRY ───────────────────────────────────────────────────────
 //  id         — unique key, matches photo filenames: photos/p01-01.jpg etc.
@@ -50,8 +75,8 @@ const ABOUT_HTML = `
 //  status     — current status
 //  team       — array of names
 //  collab     — array of collaborator names
-//  photos     — number of photos available (files: photos/<id>-01.jpg …)
-//               Set to 0 if no photos yet — placeholder shown instead.
+//  photos     — TOTAL photos available (files: photos/<id>-01.webp …)
+//  preview    — how many appear in the grid (2–4 recommended); rest shown in modal only
 //
 //  ORDER: newest first. The grid shuffles them visually anyway.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -70,6 +95,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 0,
+    preview: 1,
   },
   {
     id: "p13",
@@ -84,6 +110,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 10,
+    preview: 3,
   },
   {
     id: "p11",
@@ -98,6 +125,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 0,
+    preview: 1,
   },
   {
     id: "p10",
@@ -112,6 +140,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 0,
+    preview: 1,
   },
   {
     id: "p09",
@@ -126,6 +155,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 5,
+    preview: 3,
   },
   {
     id: "p08",
@@ -140,6 +170,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 7,
+    preview: 3,
   },
   {
     id: "p07",
@@ -154,6 +185,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 10,
+    preview: 3,
   },
   {
     id: "p06b",
@@ -168,6 +200,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 7,
+    preview: 3,
   },
   {
     id: "p06",
@@ -182,6 +215,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 0,
+    preview: 1,
   },
   {
     id: "p05",
@@ -196,6 +230,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 0,
+    preview: 1,
   },
   {
     id: "p04",
@@ -210,6 +245,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 0,
+    preview: 1,
   },
   {
     id: "p03",
@@ -224,6 +260,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 0,
+    preview: 1,
   },
   {
     id: "p02",
@@ -238,6 +275,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 0,
+    preview: 1,
   },
   {
     id: "p01",
@@ -252,6 +290,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 0,
+    preview: 1,
   },
 ];
 
@@ -280,15 +319,26 @@ function buildWorkListHTML() {
 
 // ── 4. PROJECT MODAL HTML ─────────────────────────────────────────────────────
 function buildProjectHTML(p) {
-  const teamHTML = p.team.length
+  const teamHTML = p.team && p.team.length
     ? `<ul class="modal-team-list">${p.team.map(n => `<li>${n}</li>`).join('')}</ul>`
     : '—';
-  const collabHTML = p.collab.length
+  const collabHTML = p.collab && p.collab.length
     ? `<ul class="modal-team-list">${p.collab.map(n => `<li>${n}</li>`).join('')}</ul>`
     : null;
 
+  // All photos shown in modal (not just preview)
+  let imagesHTML = '';
+  if (p.photos > 0) {
+    const imgs = Array.from({ length: p.photos }, (_, i) => {
+      const num = String(i + 1).padStart(2, '0');
+      return `<img src="photos/${p.id}-${num}.webp" loading="lazy" alt="${p.title} ${num}">`;
+    }).join('');
+    imagesHTML = `<div class="modal-images">${imgs}</div>`;
+  }
+
   return `
-    <h2>${p.title}</h2>
+    <div class="modal-title">${p.title}</div>
+    ${p.subtitle ? `<span class="modal-subtitle">${p.subtitle}</span>` : ''}
     <table class="modal-data-table">
       <tr><td>Location</td><td>${p.location}</td></tr>
       <tr><td>Type</td><td>${p.type}</td></tr>
@@ -298,7 +348,8 @@ function buildProjectHTML(p) {
       <tr><td>Team</td><td>${teamHTML}</td></tr>
       ${collabHTML ? `<tr><td>Collaborators</td><td>${collabHTML}</td></tr>` : ''}
     </table>
-    <p class="modal-desc">${p.desc}</p>`;
+    <p class="modal-desc">${p.desc}</p>
+    ${imagesHTML}`;
 }
 
 // ── 5. BUILD PARALLAX GRID ────────────────────────────────────────────────────
@@ -311,11 +362,11 @@ const COL_COUNT  = isMobile ? 1 : 3;
 const SPEEDS     = isMobile ? [1.0] : [0.7, 1.35, 0.55];
 const MARGINS    = isMobile ? [0]   : [0, -200, -110];
 
-// Build a flat list of image tiles from all projects
+// Build a flat list of PREVIEW tiles for the grid (p.preview per project)
 function buildTileList() {
   const tiles = [];
   PROJECTS.forEach(p => {
-    const count = Math.max(p.photos, 1); // always at least 1 tile per project
+    const count = p.photos > 0 ? Math.min(p.preview ?? 3, p.photos) : 1;
     for (let i = 1; i <= count; i++) {
       const num = String(i).padStart(2, '0');
       const src = p.photos > 0
@@ -394,7 +445,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') modalContainer.classList.add('hidden');
 });
 
-document.getElementById('about-btn').addEventListener('click', () => openModal(ABOUT_HTML));
+document.getElementById('about-btn').addEventListener('click', () => openModal(buildAboutHTML()));
 
 
 function attachClickListeners() {
