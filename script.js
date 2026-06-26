@@ -120,10 +120,10 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Jorge Sanchez Bajo"],
     collab: ["tebt+"],
     photos: 10,
-    preview: 3,
+    preview: 7,
   },
   {
-    id: "p11",
+    id: "p12",
     title: "Die Den Gletscher Bewohnen",
     subtitle: "Europan — Winner",
     desc: "Winning entry for the Europan competition. The project addresses the geological threshold between molasse and moraine, proposing a model of dwelling that is responsive to the terrain, water, and social change. The glacier is not backdrop but partner — a slow, material presence that shapes the logic of the building.",
@@ -134,8 +134,8 @@ const PROJECTS = [
     status: "1st Prize",
     team: ["Andrew Georges, Jorge Sanchez Bajo, Bettina Kagelmacher, Roman Schober"],
     collab: ["tebt+","Bettina Kagelmacher", "Roman Schober"],
-    photos: 0,
-    preview: 1,
+    photos: 7,
+    preview: 3,
   },
   {
     id: "p10",
@@ -149,8 +149,8 @@ const PROJECTS = [
     status: "Competition",
     team: ["Andrew Georges, Jorge Sanchez Bajo, Bettina Kagelmacher, Roman Schober"],
     collab: ["tebt+","Bettina Kagelmacher", "Roman Schober"],
-    photos: 0,
-    preview: 1,
+    photos: 11,
+    preview: 3,
   },
   {
     id: "p09",
@@ -195,7 +195,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Jorge Sanchez Bajo", "Andres Solano"],
     collab: ["tebt+","esteoeste estudio"],
     photos: 10,
-    preview: 3,
+    preview: 5,
   },
   {
     id: "p06b",
@@ -225,7 +225,7 @@ const PROJECTS = [
     team: ["Joe Chamata","Christina Karam","Andrey Bader"],
     collab: [],
     photos: 0,
-    preview: 1,
+    preview: 0,
   },
   {
     id: "p06",
@@ -239,8 +239,8 @@ const PROJECTS = [
     status: "—",
     team: ["Andrew Georges", "Nahi El Khoury", "MZ", "BSJ"],
     collab: ["CL","NNDO"],
-    photos: 0,
-    preview: 1,
+    photos: 6,
+    preview: 2,
   },
   {
     id: "p05b",
@@ -270,7 +270,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata"],
     collab: [],
     photos: 0,
-    preview: 1,
+    preview: 0,
   },
   {
     id: "p04",
@@ -285,7 +285,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata","Mike Chaiban"],
     collab: [],
     photos: 0,
-    preview: 1,
+    preview: 0,
   },
   {
     id: "p03",
@@ -300,7 +300,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata", "Mike Chaiban"],
     collab: [],
     photos: 0,
-    preview: 1,
+    preview: 0,
   },
   {
     id: "p03b",
@@ -315,7 +315,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra", "Nahi El Khoury", "Joe Chamata","Jaques Zekian"],
     collab: [],
     photos: 0,
-    preview: 1,
+    preview: 0,
   },
   {
     id: "p03c",
@@ -330,7 +330,7 @@ const PROJECTS = [
     team: ["Andrew Georges", "Charbel Abou Chacra"],
     collab: [],
     photos: 0,
-    preview: 1,
+    preview: 0,
   },
   {
     id: "p02",
@@ -345,7 +345,7 @@ const PROJECTS = [
     team: ["Nahi El Khoury", "Valerie Saab"],
     collab: [],
     photos: 0,
-    preview: 1,
+    preview: 0,
   },
   {
     id: "p01",
@@ -360,7 +360,7 @@ const PROJECTS = [
     team: ["Charbel Abou Chacra", "Nahi El Khoury", "Kay Bardawil", "Charbel Corbani", "????"],
     collab: [],
     photos: 0,
-    preview: 1,
+    preview: 0,
   },
 ];
 
