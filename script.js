@@ -61,21 +61,7 @@ function buildAboutHTML() {
       <p class="partner-bio">${p.bio}</p>
     </div>`).join('');
 
-  return `
-<div class="modal-title about-title">MTGRP</div>
-    <p class="about-statement">
-      MTGRP is metagroupe is an architecture practice working at the intersection of thermal conditions, open-ended use, and collective space. We pursue a political approach to material expression — buildings as proposals about how life is organised and shared.
-    Our work spans housing, adaptive reuse, urban design, and competition. Across these scales we return to the same questions: how a building manages energy and climate as a social act; how programme can remain underdetermined; how the shared spaces of a building carry as much weight as the private ones.
-    We are interested in metabolism and circularity not as technical positions but as political ones — in what it means to build with and within existing material and social structures rather than against them.
-    </p>
-    <div class="about-partners">${partnersHTML}</div>
-    <table class="about-contact-table">
-      <tr><td>Email</td><td><a href="mailto:metagroupearch@gmail.com" style="color:#0033FF;text-decoration:none">metagroupearch@gmail.com</a></td></tr>
-      <tr><td>Instagram</td><td><a href="https://www.instagram.com/metagroupe/" target="_blank" style="color:#0033FF;text-decoration:none">@metagroupe</a></td></tr>
-      <tr><td>Offices</td><td>Beirut &nbsp;·&nbsp; Madrid &nbsp;·&nbsp; Milan</td></tr>
-      <tr><td>Est.</td><td>2018</td></tr>
-    </table>
-    ${(COLLABORATORS.architects.length || COLLABORATORS.offices.length) ? `
+  const collabsHTML = (COLLABORATORS.architects.length || COLLABORATORS.offices.length) ? `
     <div class="about-collabs">
       <div class="about-collabs-col">
         <div class="collabs-label">Collaborators and Friends</div>
@@ -85,7 +71,64 @@ function buildAboutHTML() {
         <div class="collabs-label">Offices of our Friends</div>
         ${COLLABORATORS.offices.map(n => `<div class="collab-entry">${n}</div>`).join('')}
       </div>
-    </div>` : ''}`;
+    </div>` : '';
+
+  return `
+    <div class="modal-title about-title">MTGRP</div>
+    <p class="about-statement">
+      MTGRP is metagroupe is an architecture practice working at the intersection of thermal conditions, open-ended use, and collective space. We pursue a political approach to material expression — buildings as proposals about how life is organised and shared.
+      <br><br>
+      Our work spans housing, adaptive reuse, urban design, and competition. Across these scales we return to the same questions: how a building manages energy and climate as a social act; how programme can remain underdetermined; how the shared spaces of a building carry as much weight as the private ones.
+      <br><br>
+      We are interested in metabolism and circularity not as technical positions but as political ones — in what it means to build with and within existing material and social structures rather than against them.
+    </p>
+
+    <div class="about-partners">${partnersHTML}</div>
+
+    <div class="about-list-section">
+      <div class="collabs-label">Publications</div>
+      <a href="https://www.europan-europe.eu/en/exchanges/die-den-gletscher-bewohnen" target="_blank" rel="noopener" class="about-list-item">
+        <span>Die Den Gletscher Bewohnen</span>
+        <span class="about-list-meta">Europan 18 Portrait &mdash; 2026</span>
+      </a>
+      <a href="https://unbuiltarch.org/en/the-walled-garden-2/" target="_blank" rel="noopener" class="about-list-item">
+        <span>Walled Garden</span>
+        <span class="about-list-meta">unbuiltarch Journal &mdash; 2023</span>
+      </a>
+      <a href="https://beirutartcenter.org/event/beirut-makers-x-beirut-art-center/" target="_blank" rel="noopener" class="about-list-item">
+        <span>Pliee - Beirut Makers Exhibition</span>
+        <span class="about-list-meta">Beirut Art Center &mdash; 2022</span>
+      </a>
+      <a href="https://www.google.com/amp/s/beirut-today.com/2019/03/07/student-transform-beirut-river-park/amp/" target="_blank" rel="noopener" class="about-list-item">
+        <span>Beirut River Project - Interview</span>
+        <span class="about-list-meta">Beirut Today &mdash; 2019</span>
+      </a>
+      <a href="https://www.lebanontraveler.com/en/magazine/keep-walking-lebanon/" target="_blank" rel="noopener" class="about-list-item">
+        <span>KWL - Bringing Visions to Life</span>
+        <span class="about-list-meta">Lebanon Traveler &mdash; 2019</span>
+      </a>
+    </div>
+
+    <div class="about-list-section" style="margin-bottom: 32px;">
+      <div class="collabs-label">Academic & Workshops</div>
+      <div class="about-list-item">
+        <span>MIAW – Milan International Architecture Workshop</span>
+        <span class="about-list-meta">Politecnico di Milano</span>
+      </div>
+      <div class="about-list-item">
+        <span>Housing in Beirut</span>
+        <span class="about-list-meta">Introductory Session - MCH</span>
+      </div>
+    </div>
+
+    ${collabsHTML}
+
+    <table class="about-contact-table" style="margin-top: 48px;">
+      <tr><td>Email</td><td><a href="mailto:metagroupearch@gmail.com" style="color:#0033FF;text-decoration:none">metagroupearch@gmail.com</a></td></tr>
+      <tr><td>Instagram</td><td><a href="https://www.instagram.com/metagroupe/" target="_blank" style="color:#0033FF;text-decoration:none">@metagroupe</a></td></tr>
+      <tr><td>Offices</td><td>Beirut &nbsp;·&nbsp; Madrid &nbsp;·&nbsp; Milan</td></tr>
+      <tr><td>Est.</td><td>2018</td></tr>
+    </table>`;
 }
 
 // ── 2. PROJECT REGISTRY ───────────────────────────────────────────────────────

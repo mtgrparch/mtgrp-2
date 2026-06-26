@@ -374,3 +374,47 @@ body {
 @media (max-width: 600px) {
   .about-collabs { grid-template-columns: 1fr; gap: 24px; }
 }
+
+/* ── ADDED FOR ABOUT MODAL PUBLICATIONS & ACADEMIC ── */
+.about-list-section {
+  margin-top: 36px;
+}
+
+.about-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+  text-decoration: none;
+  color: #444;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.92rem;
+  transition: color 0.15s;
+}
+
+.about-list-item:last-child {
+  border-bottom: 1px solid #eee;
+}
+
+a.about-list-item:hover {
+  color: #0033FF; /* Matches your MTGRP blue */
+}
+
+.about-list-meta {
+  font-style: italic;
+  color: #888;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  margin-left: 24px;
+}
+
+@media (max-width: 600px) {
+  .about-list-item {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .about-list-meta {
+    margin-left: 0;
+  }
+}
