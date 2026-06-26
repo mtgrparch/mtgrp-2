@@ -561,6 +561,43 @@ function updateParallax() {
   requestAnimationFrame(updateParallax);
 }
 
+
+// ── LIVE WEATHER ──────────────────────────────────────────────────────────────
+// Open-Meteo: free, no API key needed. Updates every 10 minutes.
+const WEATHER_CITIES = [
+  { id: 'weather-beirut', name: 'Beirut', lat: 33.89, lon: 35.50 },
+  { id: 'weather-madrid', name: 'Madrid', lat: 40.42, lon: -3.70 },
+  { id: 'weather-milan',  name: 'Milan',  lat: 45.46, lon:  9.19 },
+];
+
+function weatherIcon(code) {
+  if (code === 0)    return '○';
+  if (code <= 2)     return '◑';
+  if (code === 3)    return '●';
+  if (code <= 49)    return '≋';
+  if (code <= 69)    return '·';
+  if (code <= 79)    return '*';
+  if (code <= 86)    return '*';
+  if (code <= 99)    return '⚡';
+  return '';
+}
+
+async function fetchWeather() {
+  WEATHER_CITIES.forEach(async city => {
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current=temperature_2m,weather_code&temperature_unit=celsius`;
+      const res  = await fetch(url);
+      const data = await res.json();
+      const temp = Math.round(data.current.temperature_2m);
+      const icon = weatherIcon(data.current.weather_code);
+      const el   = document.getElementById(city.id);
+      if (el) el.textContent = `${city.name} ${icon} ${temp}°`;
+    } catch {
+      // fail silently — just keeps showing city name
+    }
+  });
+}
+
 // ── 8. INIT ───────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
   buildGrid();
