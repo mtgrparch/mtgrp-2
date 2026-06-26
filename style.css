@@ -13,10 +13,6 @@ body {
   position: fixed;
   bottom: 16px;
   left: 12px;
-  /* width matches one column: (100vw - 2*padding - 2*gaps) / 3 columns
-     padding=12px each side, gap=12px × 2 = 36px total gap
-     so column width ≈ (100vw - 24px - 24px) / 3 = calc((100vw - 48px) / 3)
-     logo is set slightly smaller than that */
   width: calc((100vw - 48px) / 3 - 8px);
   font-family: 'Karla', sans-serif;
   font-weight: 800;
@@ -30,14 +26,12 @@ body {
   user-select: none;
 }
 
-/* mobile: full-width single column, logo takes about half */
 @media (max-width: 768px) {
   #wordmark {
     width: 52vw;
     font-size: clamp(3rem, 14vw, 6rem);
     bottom: 14px;
     left: 0;
-    padding-left: 0;
   }
 }
 
@@ -75,10 +69,7 @@ body {
   z-index: 10;
   white-space: nowrap;
 }
-
-@media (max-width: 768px) {
-  #footer-cities { display: none; }
-}
+@media (max-width: 768px) { #footer-cities { display: none; } }
 
 /* ── PARALLAX GRID ── */
 .parallax-wrapper {
@@ -106,7 +97,6 @@ body {
   transition: opacity 0.2s ease;
 }
 
-/* Different heights per column for visual rhythm */
 .parallax-col:nth-child(1) img { height: 55vh; }
 .parallax-col:nth-child(2) img { height: 72vh; }
 .parallax-col:nth-child(3) img { height: 48vh; }
@@ -115,134 +105,218 @@ body {
   .parallax-col img:hover { opacity: 0.75; }
 }
 
-/* ── MOBILE ── */
 @media (max-width: 768px) {
   .parallax-wrapper { padding: 0; gap: 0; }
 }
 
-/* ── MODAL ── */
+/* ── MODAL OVERLAY ── */
 .hidden { display: none !important; }
 
 #modal-container {
   position: fixed;
   inset: 0;
-  background: rgba(255,255,255,0.96);
+  background: rgba(255,255,255,0.92);
   z-index: 20;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 24px;
 }
 
 .modal-box {
   position: relative;
-  width: 90vw;
-  max-width: 760px;
-  max-height: 88vh;
+  width: 100%;
+  max-width: 860px;
+  max-height: 92vh;
   background: #fff;
-  border: 1px solid #000;
-  padding: 56px 48px 48px;
+  padding: 48px 52px 52px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 
 #close-modal {
   position: absolute;
-  top: 18px;
-  left: 20px;
+  top: 16px;
+  left: 18px;
   background: none;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1rem;
   cursor: pointer;
-  font-family: 'Karla', sans-serif;
+  font-family: 'EB Garamond', Georgia, serif;
   line-height: 1;
   padding: 0;
-  transition: opacity 0.15s;
+  color: #aaa;
+  transition: color 0.15s;
 }
-#close-modal:hover { opacity: 0.4; }
+#close-modal:hover { color: #000; }
 
-.modal-box h2 {
+/* ── MODAL TYPOGRAPHY — Garamond throughout, Karla only for title ── */
+.modal-title {
   font-family: 'Karla', sans-serif;
-  font-weight: 800;
-  font-size: 2rem;
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
-  margin-bottom: 24px;
-  line-height: 1;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.3rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  text-transform: none;
+}
+
+.modal-subtitle {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #888;
+  display: block;
+  margin-top: 2px;
+  margin-bottom: 20px;
 }
 
 .modal-data-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .modal-data-table td {
-  padding: 9px 0;
+  padding: 7px 0;
   vertical-align: top;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #f0f0f0;
   font-family: 'EB Garamond', Georgia, serif;
-  font-size: 1rem;
+  font-size: 0.92rem;
   line-height: 1.5;
+  color: #333;
 }
 
 .modal-data-table td:first-child {
-  font-family: 'Karla', sans-serif;
-  font-weight: 600;
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #aaa;
-  width: 110px;
-  padding-top: 11px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: #bbb;
+  width: 100px;
+  padding-top: 9px;
 }
 
 .modal-desc {
   font-family: 'EB Garamond', Georgia, serif;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   line-height: 1.78;
-  color: #333;
-  margin-bottom: 20px;
+  color: #444;
+  margin-bottom: 24px;
 }
 
 .modal-team-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 .modal-team-list li {
   font-family: 'EB Garamond', Georgia, serif;
-  font-size: 0.95rem;
-  color: #888;
-}
-
-.about-statement {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 1.1rem;
-  line-height: 1.75;
-  color: #111;
-  margin-bottom: 28px;
-}
-
-.about-partners {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px 32px;
-  margin-bottom: 28px;
-}
-.partner-name {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 1rem;
-  color: #111;
-}
-.partner-role {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-style: italic;
   font-size: 0.9rem;
   color: #888;
 }
 
+/* ── PROJECT MODAL IMAGES — two-column masonry ── */
+.modal-images {
+  columns: 2;
+  column-gap: 8px;
+  margin-top: 24px;
+}
+.modal-images img {
+  break-inside: avoid;
+  margin-bottom: 8px;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+@media (max-width: 600px) { .modal-images { columns: 1; } }
+
+/* ── ABOUT MODAL ── */
+.about-statement {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.98rem;
+  line-height: 1.78;
+  color: #333;
+  margin-bottom: 28px;
+}
+
+/* Partner grid: photo + name + bio */
+.about-partners {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 36px;
+  margin-bottom: 24px;
+}
+
+.partner-photo {
+  width: 100%;
+  aspect-ratio: 3/2;
+  background: #ebebeb;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.78rem;
+  color: #bbb;
+  overflow: hidden;
+}
+.partner-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.partner-name {
+  font-family: 'Karla', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #111;
+  margin-bottom: 2px;
+}
+
+.partner-role {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+.partner-bio {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #666;
+}
+
+/* contact rows inside about modal */
+.about-contact-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.about-contact-table td {
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.88rem;
+  color: #444;
+}
+.about-contact-table td:first-child {
+  font-style: italic;
+  color: #bbb;
+  width: 90px;
+}
+
+/* ── MOBILE ── */
 @media (max-width: 768px) {
-  .modal-box { padding: 48px 24px 32px; }
-  .about-partners { grid-template-columns: 1fr; }
+  .modal-box { padding: 40px 20px 32px; }
+  .about-partners { grid-template-columns: 1fr; gap: 20px; }
+  #modal-container { padding: 12px; }
 }
