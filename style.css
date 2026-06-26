@@ -10,29 +10,6 @@ body {
 
 /* ── BOTTOM LEFT: MTGRP LOGO ── */
 
-#landing-desc {
-  position: fixed;
-  bottom: calc(16px + 0.85em * 5.5rem + 8px);
-  left: 12px;
-  width: calc((100vw - 48px) / 3 - 8px);
-  font-family: 'EB Garamond', Georgia, serif;
-  font-style: italic;
-  font-size: 0.78rem;
-  line-height: 1.65;
-  color: #0a0a0a;
-  pointer-events: none;
-  z-index: 10;
-}
-
-@media (max-width: 768px) {
-  #landing-desc {
-    width: 52vw;
-    left: 0;
-    font-size: 0.72rem;
-    bottom: calc(14px + 6rem + 8px);
-  }
-}
-
 #wordmark {
   position: fixed;
   bottom: 16px;
@@ -50,12 +27,34 @@ body {
   user-select: none;
 }
 
+#landing-desc {
+  position: fixed;
+  bottom: calc(16px + clamp(2.8rem, 8vw, 5.5rem) * 0.85 + 10px);
+  left: 12px;
+  width: calc((100vw - 48px) / 3 - 8px);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: #0a0a0a;
+  pointer-events: none;
+  z-index: 10;
+}
+
 @media (max-width: 768px) {
   #wordmark {
     width: 52vw;
-    font-size: clamp(3rem, 14vw, 6rem);
-    bottom: 14px;
     left: 0;
+    bottom: 14px;
+    font-size: clamp(3rem, 14vw, 6rem);
+  }
+
+  #landing-desc {
+    bottom: auto;
+    top: 16px;
+    left: 0;
+    width: 52vw;
+    font-size: 0.72rem;
   }
 }
 
