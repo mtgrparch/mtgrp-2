@@ -50,9 +50,9 @@ body {
   }
 
   #landing-desc {
-    bottom: auto;
-    top: 16px;
-    left: 0;
+    bottom: unset;
+    top: 20px;
+    left: 16px;
     width: 52vw;
     font-size: 0.72rem;
   }
