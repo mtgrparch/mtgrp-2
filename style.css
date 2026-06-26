@@ -151,6 +151,7 @@ body {
 #close-modal:hover { color: #000; }
 
 /* ── MODAL TYPOGRAPHY — Garamond throughout, Karla only for title ── */
+/* project titles — Garamond italic */
 .modal-title {
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 400;
@@ -159,6 +160,14 @@ body {
   letter-spacing: 0;
   margin-bottom: 20px;
   line-height: 1.1;
+}
+
+/* about modal title only — Karla */
+.modal-title.about-title {
+  font-family: 'Karla', sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  letter-spacing: -0.01em;
 }
 
 .modal-subtitle {
@@ -242,8 +251,8 @@ body {
 /* Partner grid: photo + name + bio */
 .about-partners {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px 36px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 20px;
   margin-bottom: 24px;
 }
 
@@ -311,7 +320,7 @@ body {
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   .modal-box { padding: 40px 20px 32px; }
-  .about-partners { grid-template-columns: 1fr; gap: 20px; }
+  .about-partners { grid-template-columns: 1fr 1fr; gap: 20px; }
   #modal-container { padding: 12px; }
 }
 
