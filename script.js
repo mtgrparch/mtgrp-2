@@ -39,13 +39,12 @@ const PARTNERS = [
 //  Two columns: architects (individuals) and offices (firms).
 //  Add names to the arrays below — they appear in the about modal.
 const COLLABORATORS = {
+  // Fill these in — architects are individuals, offices are firms/studios
   architects: [
-    // "Name One",
-    // "Name Two",
+    "Add architect name",
   ],
   offices: [
-    // "Studio One",
-    // "Studio Two",
+    "Add office name",
   ],
 };
 
@@ -608,4 +607,7 @@ window.addEventListener('DOMContentLoaded', () => {
   grid.addEventListener('touchend',   onTouchEnd,   { passive: true  });
 
   requestAnimationFrame(updateParallax);
+
+  fetchWeather();
+  setInterval(fetchWeather, 10 * 60 * 1000);
 });
