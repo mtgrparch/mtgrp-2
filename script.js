@@ -494,6 +494,7 @@ const modalContent   = document.getElementById('modal-content');
 const closeBtn       = document.getElementById('close-modal');
 
 function openModal(html) {
+  velocity = 0;
   modalContent.innerHTML = html;
   modalContainer.classList.remove('hidden');
   // After opening work list, attach row click handlers
@@ -550,6 +551,7 @@ const TOUCH_SCALE  = 1.6;    // touch drag sensitivity
 
 // Mouse wheel — add to velocity rather than position directly
 window.addEventListener('wheel', e => {
+  if (!modalContainer.classList.contains('hidden')) return;
   e.preventDefault();
   velocity += e.deltaY * WHEEL_SCALE;
 }, { passive: false });
@@ -566,6 +568,7 @@ function onTouchStart(e) {
 }
 
 function onTouchMove(e) {
+  if (!modalContainer.classList.contains('hidden')) return;
   e.preventDefault();
   const currentY = e.touches[0].clientY;
   const delta    = lastTouchY - currentY;
