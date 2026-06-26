@@ -152,8 +152,8 @@ body {
 
 /* ── MODAL TYPOGRAPHY — Garamond throughout, Karla only for title ── */
 .modal-title {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-weight: 400;
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
   font-style: italic;
   font-size: 1.3rem;
   letter-spacing: 0.01em;
@@ -174,14 +174,12 @@ body {
 
 .modal-data-table {
   width: 100%;
-  border-collapse: collapse;
   margin-bottom: 20px;
 }
 
 .modal-data-table td {
   padding: 7px 0;
   vertical-align: top;
-  border-bottom: 1px solid #f0f0f0;
   font-family: 'EB Garamond', Georgia, serif;
   font-size: 0.92rem;
   line-height: 1.5;
@@ -298,12 +296,10 @@ body {
 /* contact rows inside about modal */
 .about-contact-table {
   width: 100%;
-  border-collapse: collapse;
   margin-top: 8px;
 }
 .about-contact-table td {
   padding: 6px 0;
-  border-bottom: 1px solid #f0f0f0;
   font-family: 'EB Garamond', Georgia, serif;
   font-size: 0.88rem;
   color: #444;
@@ -319,4 +315,32 @@ body {
   .modal-box { padding: 40px 20px 32px; }
   .about-partners { grid-template-columns: 1fr; gap: 20px; }
   #modal-container { padding: 12px; }
+}
+
+/* ── COLLABORATORS in about modal ── */
+.about-collabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 36px;
+  margin-top: 28px;
+  padding-top: 4px;
+}
+
+.collabs-label {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: #bbb;
+  margin-bottom: 10px;
+}
+
+.collab-entry {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.92rem;
+  color: #444;
+  padding: 4px 0;
+}
+
+@media (max-width: 600px) {
+  .about-collabs { grid-template-columns: 1fr; gap: 24px; }
 }
